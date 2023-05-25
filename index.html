@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <form>
+        <table border="1" align="center" cellspacing="5" cellpadding="5"
+            style="background-color: black;color: #ffffff; width: 700px; height: 500px; font-family: sans-serif;border-color: rgba(255, 237, 237, 0.888);font-size: 20px;">
+            <tr>
+                <td style="text-align: center;">First Name</td>
+                <td><input type="text" id="f_name" style="width: 100%; height: 100%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">Last Name</td>
+                <td><input type="text" id="l_name" style="width: 100%; height: 100%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">Email</td>
+                <td><input type="email" id="email" style="width: 100%; height: 100%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">Password</td>
+                <td><input type="password" id="password" style="width: 100%; height: 100%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">Conform Password</td>
+                <td><input type="password" id="c-password" style="width: 100%; height: 100%;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="button" value="SUBMIT" onclick="save()"
+                        style="width: 20%; height: 70%;font-size: 15px;font-weight: 600;text-align: center;"></td>
+            </tr>
+            <div id="error">
+            </div>
+        </table>
+    </form>
+
+</body>
+
+</html>
+<script type="text/javascript">
+
+    const save = () => {
+
+        var nameformat = /^[a-zA-Z\s]+$/;
+        var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        var f_name = document.getElementById("f_name").value;
+        var l_name = document.getElementById("l_name").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var c_password = document.getElementById("c-password").value;
+
+        try {
+            if (!f_name && !l_name && !email && !password && !c_password) {
+                throw "Please fill data ";
+                return false;
+            }
+            if (!f_name) {
+                throw "Please fill name Field";
+                return false;
+            }
+            else if (!f_name.match(nameformat)) {
+                throw "name must be in character";
+                return false;
+            }
+
+            if (!l_name) {
+                throw "Please fill name Field";
+                return false;
+            }
+            else if (!l_name.match(nameformat)) {
+                throw "name must be in character";
+                return false;
+            }
+
+            if (!email) {
+                throw "Please fill email Field";
+                return false;
+            }
+            if (!email.match(mailformat)) {
+                throw "email is not valid";
+                return false;
+            }
+
+
+            if (!password) {
+                throw "Please fill password Field";
+                return false;
+            }
+            else if (password.length < 8 || password.length > 16) {
+                throw "minimum 8 and maximum 16 character input";
+                return false;
+            }
+
+            if (password != c_password) {
+                throw "Password not mached";
+                return false;
+            }
+        }
+
+
+        catch (err) {
+            alert(err,error.err);
+            // document.getElementById("error").innerHTML = err;
+        }
+    }
+
+</script>
